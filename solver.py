@@ -28,6 +28,7 @@ global_t = MPI.Wtime()
 # rank and cluster size
 rank = comm.rank
 world_size = comm.size
+name = MPI.Get_processor_name()
 
 nrows = get_chunk(n, world_size, rank)
 rows = np.zeros(nrows, dtype = int) # indexes of rows for current proc
@@ -50,6 +51,9 @@ for i, line in enumerate(inp):
 
     if (rank == master):
         A.append(split)
+
+print("{}:{} => rows {}".format(name, rank, rows))
+comm.Barrier()
 
 if (rank == master):
     t = MPI.Wtime() - t
