@@ -51,8 +51,6 @@ for i, line in enumerate(inp):
     if (rank == master):
         A.append(split)
 
-print("{}: {} => {}".format(rank, nrows, rows))
-
 if (rank == master):
     t = MPI.Wtime() - t
     print("Reading data completed: time (sec) {0:.5}".format(t))
